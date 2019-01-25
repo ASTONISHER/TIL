@@ -95,4 +95,45 @@
     // \0문자가 나오면 정지해서 딱 Down만 출력됨
 ```
 
+<h3>4. 포인터와 함수</h3>
+
+- 인자 전달할 때에는 파라미터 자리를 int *para로 선언 해주고 호출시 그냥 부르면 됨
+```C
+    void example(int *param, int len){...}
+    
+    int main(){
+        int arr[3] = {1, 2, 3};
+        example(arr, sizeof(arr)/sizeof(int));
+        return 0;
+    }
+```
+- call-by-value: 인자로 단순히 변수 값을 전달 / call-by-reference: 인자로 변수의 주소값을 전달
+```C
+    void swap(int *num1, int *num2){        // num1, num2로 인자를 받으면 복사 형태로 인자전달이 되기 때문에 안됨 
+        int temp = *num1;
+        *num1 = *num2;
+        *num2 = temp;
+    }  
+    
+    // swap(&a, &b); 처럼 호출
+```
+- const: 코드의 안정성을 높이기 위해 
+```C
+    int num = 20;
+    const int *ptr = &num;      
+    
+    // 포인터 변수를 이용해서 포인터가 가리키는 변수에 저장된 값을 변경하는 것을 허용하지 않음
+        // *ptr = 30; 은 컴파일 에러를 발생시킴
+        // 변수 자체를 상수화하는 것은 아니므로 num = 30; 은 정상작동
+```
+
+```C 
+    int num1 = 10, num2 = 30;
+    int *const ptr = &num1;
+    
+    // 포인터가 가리키는 주소값을 변경하지 못한다는 의미
+        // *ptr = 50; 은 정상작동
+        // ptr = &num2; 는 컴파일 에러
+```
+
 
